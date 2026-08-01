@@ -125,162 +125,215 @@ a{
 }
 
 /*==================================================
-                HEADER
+HEADER
 ==================================================*/
 
-header{
+.site-header{
 
-    position:fixed;
+    position:sticky;
+    top:0;
+    left:0;
 
-    top:18px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    width:94%;
-
-    max-width:1700px;
-
+    width:100%;
     height:82px;
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
-    padding:0 45px;
+    padding:0 5%;
 
-    border-radius:20px;
+    background:rgba(5,5,5,.92);
+    backdrop-filter:blur(18px);
 
-    backdrop-filter:blur(22px);
-
-    background:rgba(10,10,10,.55);
-
-    border:1px solid rgba(255,255,255,.08);
+    border-bottom:1px solid rgba(255,255,255,.06);
 
     z-index:1000;
-
-    transition:.4s;
-
-}
-
-header:hover{
-
-    border-color:rgba(0,200,245,.4);
-
-}
-
-.logo img{
-
-    width:110px;
-
-}
-
-nav{
-
-    display:flex;
-
-    gap:45px;
-
-}
-
-nav a{
-
-    position:relative;
-
-    color:#d0d0d0;
-
-    letter-spacing:2px;
-
-    font-size:13px;
-
-    font-weight:600;
-
-    transition:.3s;
-
-}
-
-nav a::after{
-
-    content:"";
-
-    position:absolute;
-
-    bottom:-10px;
-
-    left:50%;
-
-    width:0;
-
-    height:2px;
-
-    transform:translateX(-50%);
-
-    background:var(--accent);
-
-    transition:.3s;
-
-}
-
-nav a:hover{
-
-    color:white;
-
-}
-
-nav a.active{
-
-    color:white;
-
-}
-
-nav a:hover::after,
-
-nav a.active::after{
-
-    width:100%;
-
-}
-
-.icons{
-
-    display:flex;
-
-    gap:18px;
-
-}
-
-.icons i{
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    background:#181818;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    cursor:pointer;
 
     transition:.35s;
 
 }
 
-.icons i:hover{
+/*==========================
+LOGO
+==========================*/
 
-    background:var(--accent);
+.logo{
 
-    color:black;
+    display:flex;
+    align-items:center;
 
-    transform:translateY(-4px);
+}
+
+.logo img{
+
+    width:145px;
+
+    transition:.35s;
+
+}
+
+.logo:hover img{
+
+    transform:scale(1.05);
+
+}
+
+/*==========================
+NAVIGATION
+==========================*/
+
+.site-header nav{
+
+    display:flex;
+    align-items:center;
+    gap:40px;
+
+}
+
+.site-header nav a{
+
+    position:relative;
+
+    color:#fff;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    letter-spacing:2px;
+
+    transition:.35s;
+
+}
+
+.site-header nav a:hover{
+
+    color:var(--blue);
+
+}
+
+.site-header nav a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-8px;
+
+    width:0;
+    height:2px;
+
+    background:var(--blue);
+
+    transition:.35s;
+
+}
+
+.site-header nav a:hover::after{
+
+    width:100%;
+
+}
+
+/*==========================
+ICÔNES
+==========================*/
+
+.header-icons{
+
+    display:flex;
+    align-items:center;
+    gap:22px;
+
+}
+
+.header-icons a{
+
+    position:relative;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#fff;
+
+    border-radius:50%;
+
+    transition:.35s;
+
+}
+
+.header-icons a:hover{
+
+    color:var(--blue);
+
+    background:rgba(255,255,255,.05);
+
+}
+
+.header-icons i{
+
+    font-size:20px;
+
+}
+
+/*==========================
+COMPTEURS
+==========================*/
+
+.cart-count,
+.wishlist-count{
+
+    position:absolute;
+
+    top:-5px;
+    right:-5px;
+
+    min-width:19px;
+    height:19px;
+
+    padding:0 4px;
+
+    border-radius:50%;
+
+    background:var(--blue);
+
+    color:#000;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:11px;
+    font-weight:700;
+
+}
+
+/*==========================
+MENU MOBILE
+==========================*/
+
+.menu-toggle{
+
+    display:none;
+
+    width:42px;
+    height:42px;
+
+    border:none;
+
+    background:none;
+
+    color:#fff;
+
+    font-size:22px;
+
+    cursor:pointer;
 
 }
 
