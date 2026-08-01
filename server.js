@@ -63,6 +63,9 @@ db.exec(schema);
 app.use(express.json());
 
 app.use(express.static(__dirname));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(root, "index.html"));
+});
 
 // =====================================
 // NODEMAILER
@@ -446,29 +449,30 @@ app.post("/api/create-checkout-session", async (req, res) => {
 
         db.prepare(`
 
-            INSERT INTO orders
+INSERT INTO orders
 
-            (
+(
 
-                stripe_session_id,
+    stripe_session_id,
 
-                amount,
+    total_cents,
 
-                status
+    status
 
-            )
+)
 
-            VALUES
+VALUES
 
-            (
+(
 
-                ?,
+    ?,
 
-                ?,
+    ?,
 
-                ?
+    ?
 
-            )
+)
+`
 
         `).run(
 
