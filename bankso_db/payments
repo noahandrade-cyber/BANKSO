@@ -1,0 +1,21 @@
+CREATE TABLE payments (
+
+id INT AUTO_INCREMENT PRIMARY KEY,
+
+order_id INT,
+
+provider VARCHAR(50),
+
+transaction_id VARCHAR(255),
+
+amount DECIMAL(10,2),
+
+status VARCHAR(50),
+
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+FOREIGN KEY(order_id)
+
+REFERENCES orders(id)
+
+);

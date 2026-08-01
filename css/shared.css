@@ -1,0 +1,515 @@
+@import url('mobile.css');
+
+/*=====================================
+            RESET
+======================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    width:100%;
+    height:100%;
+}
+
+body{
+
+    width:100%;
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    font-family:"Montserrat",sans-serif;
+
+    background:#050505;
+
+}
+
+/*=====================================
+            HEADER PC
+======================================*/
+
+.site-header{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    height:88px;
+
+    display:grid;
+
+    grid-template-columns:180px 1fr 180px;
+
+    align-items:center;
+
+    padding:0 40px;
+
+    background:rgba(5,5,5,.97);
+
+    backdrop-filter:blur(16px);
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    z-index:9999;
+
+}
+
+/*=========================
+        LOGO
+=========================*/
+
+.site-header .logo{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    width:auto;
+
+}
+
+.site-header .logo img{
+
+    width:105px;
+
+    filter:brightness(0) invert(1);
+
+}
+
+/*=========================
+        MENU
+=========================*/
+
+.site-header nav{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:42px;
+
+}
+
+.site-header nav a{
+
+    position:relative;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    letter-spacing:2px;
+
+    transition:.3s;
+
+}
+
+.site-header nav a::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+
+    bottom:-8px;
+
+    width:0;
+
+    height:2px;
+
+    background:#14c8ef;
+
+    transition:.3s;
+
+}
+
+.site-header nav a:hover{
+
+    color:#14c8ef;
+
+}
+
+.site-header nav a:hover::after{
+
+    width:100%;
+
+}
+
+/*=========================
+        ICONES
+=========================*/
+
+.header-icons{
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    align-items:center;
+
+    gap:22px;
+
+}
+
+.header-icons a{
+
+    position:relative;
+
+    color:white;
+
+    font-size:22px;
+
+    transition:.3s;
+
+}
+
+.header-icons a:hover{
+
+    color:#14c8ef;
+
+    transform:translateY(-2px);
+
+}
+
+/*=========================
+        COMPTEURS
+=========================*/
+
+.header-icons span{
+
+    position:absolute;
+
+    top:-8px;
+
+    right:-8px;
+
+    width:22px;
+
+    height:22px;
+
+    border-radius:50%;
+
+    background:#14c8ef;
+
+    color:#050505;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    box-shadow:0 0 12px rgba(20,200,239,.35);
+
+}
+
+/*=========================
+        HAMBURGER
+=========================*/
+
+.menu-toggle{
+
+    display:none;
+
+}
+/*=====================================
+        RESPONSIVE TABLETTE
+======================================*/
+
+@media (max-width:1024px){
+
+.site-header{
+
+    padding:0 24px;
+
+}
+
+.site-header nav{
+
+    gap:26px;
+
+}
+
+.site-header .logo{
+
+    width:95px;
+
+}
+
+}
+
+/*=====================================
+            MOBILE
+======================================*/
+
+@media (max-width:800px){
+
+.site-header{
+
+    height:72px;
+
+    padding:0 16px;
+
+}
+
+/* Logo */
+
+.site-header .logo{
+
+    width:82px;
+
+}
+
+/* Bouton hamburger */
+
+.menu-toggle{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    order:3;
+
+    z-index:10002;
+
+}
+
+/* Icônes */
+
+.header-icons{
+
+    margin-left:auto;
+
+    margin-right:14px;
+
+    gap:16px;
+
+}
+
+.header-icons a{
+
+    font-size:20px;
+
+}
+
+/*=========================
+        MENU
+==========================*/
+
+.site-header nav{
+
+    position:fixed;
+
+    top:72px;
+
+    left:0;
+
+    width:100%;
+
+    background:#0b0b0b;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:flex-start;
+
+    gap:0;
+
+    overflow:hidden;
+
+    max-height:0;
+
+    transition:max-height .35s ease;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    z-index:10000;
+
+}
+
+.site-header nav.open{
+
+    max-height:420px;
+
+}
+
+.site-header nav a{
+
+    width:100%;
+
+    padding:20px;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    letter-spacing:2px;
+
+    border-bottom:1px solid rgba(255,255,255,.08);
+
+    transition:.3s;
+
+}
+
+.site-header nav a:last-child{
+
+    border-bottom:none;
+
+}
+
+.site-header nav a:hover{
+
+    background:#171717;
+
+    color:#00d2ff;
+
+}
+
+}
+
+/*=====================================
+        PETITS SMARTPHONES
+======================================*/
+
+@media (max-width:480px){
+
+.site-header{
+
+    height:66px;
+
+    padding:0 12px;
+
+}
+
+.site-header .logo{
+
+    width:74px;
+
+}
+
+.header-icons{
+
+    gap:12px;
+
+}
+
+.header-icons a{
+
+    font-size:18px;
+
+}
+
+.menu-toggle{
+
+    font-size:26px;
+
+}
+
+.site-header nav{
+
+    top:66px;
+
+}
+
+.site-header nav a{
+
+    padding:18px;
+
+    font-size:14px;
+
+}
+
+}
+/*=====================================
+        ESPACE SOUS LE HEADER
+======================================*/
+
+/* Toutes les pages commencent sous le header */
+
+body{
+
+    padding-top:90px;
+
+}
+
+/* Si une page utilise <main> */
+
+main{
+
+    width:100%;
+
+}
+
+/* Les sections principales */
+
+.wishlist,
+.cart,
+.about,
+.contact,
+.destinations,
+.products,
+.hero,
+.page-content{
+
+    position:relative;
+
+    z-index:1;
+
+}
+
+/*=====================================
+        TABLETTE
+======================================*/
+
+@media (max-width:800px){
+
+body{
+
+    padding-top:72px;
+
+}
+
+}
+
+/*=====================================
+      PETITS SMARTPHONES
+======================================*/
+
+@media (max-width:480px){
+
+body{
+
+    padding-top:66px;
+
+}
+
+}

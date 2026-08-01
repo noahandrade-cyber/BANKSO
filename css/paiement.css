@@ -1,0 +1,910 @@
+/* ===================================================
+   BANKSO - PAIEMENT.CSS
+   PARTIE 1
+=================================================== */
+
+:root{
+
+    --primary:#00c8f5;
+    --primary-dark:#009fc5;
+
+    --bg:#050505;
+    --bg2:#0e0e0e;
+    --card:#121212;
+
+    --text:#ffffff;
+    --text2:#b9c2cb;
+
+    --border:rgba(255,255,255,.08);
+
+    --radius:22px;
+
+    --shadow:0 20px 60px rgba(0,0,0,.45);
+
+    --transition:.35s;
+
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    font-family:Montserrat,sans-serif;
+
+    color:var(--text);
+
+    background:
+    radial-gradient(circle at top right,#17375f 0%,#0b0b0b 35%,#050505 100%);
+
+}
+
+/* ========================================= */
+
+.payment-page{
+
+    width:min(1200px,92%);
+
+    margin:auto;
+
+    padding:80px 0;
+
+}
+
+/* ========================================= */
+
+.payment-intro{
+
+    text-align:center;
+
+    margin-bottom:60px;
+
+}
+
+.payment-intro p{
+
+    color:var(--primary);
+
+    font-size:13px;
+
+    letter-spacing:.25em;
+
+    font-weight:700;
+
+}
+
+.payment-intro h1{
+
+    font-family:Anton,sans-serif;
+
+    font-size:clamp(50px,7vw,85px);
+
+    font-weight:400;
+
+    margin:18px 0;
+
+    letter-spacing:.05em;
+
+}
+
+.payment-intro span{
+
+    color:var(--primary);
+
+}
+
+.payment-intro a{
+
+    color:#c5ced7;
+
+    text-decoration:none;
+
+}
+
+.payment-intro a:hover{
+
+    color:var(--primary);
+
+}
+
+/* ========================================= */
+
+.payment-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    minmax(0,1.2fr)
+
+    minmax(330px,.8fr);
+
+    gap:35px;
+
+    align-items:start;
+
+}
+
+/* ========================================= */
+
+.terminal{
+
+    background:linear-gradient(145deg,#171717,#0b0b0b);
+
+    border-radius:var(--radius);
+
+    border:1px solid var(--border);
+
+    padding:35px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.terminal-head{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    color:var(--primary);
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:.15em;
+
+}
+
+.terminal h2{
+
+    font-family:Anton,sans-serif;
+
+    font-size:38px;
+
+    font-weight:400;
+
+    margin:30px 0;
+
+}
+
+.terminal label{
+
+    display:block;
+
+    margin-bottom:18px;
+
+    color:#d5dce2;
+
+    font-size:12px;
+
+    letter-spacing:.08em;
+
+    font-weight:700;
+
+}
+
+.terminal input{
+
+    width:100%;
+
+    margin-top:10px;
+
+    padding:17px;
+
+    border-radius:12px;
+
+    border:1px solid var(--border);
+
+    background:#090909;
+
+    color:white;
+
+    font-size:16px;
+
+    outline:none;
+
+    transition:var(--transition);
+
+}
+
+.terminal input:focus{
+
+    border-color:var(--primary);
+
+    box-shadow:
+
+    0 0 0 4px rgba(0,200,245,.15);
+
+}
+
+/* ========================================= */
+
+.payment-row{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:15px;
+
+}
+
+/* ========================================= */
+
+.payment-note{
+
+    margin:25px 0;
+
+    color:#99a8b4;
+
+    line-height:1.7;
+
+    font-size:13px;
+
+}
+
+.payment-note i{
+
+    color:var(--primary);
+
+}
+
+/* ========================================= */
+
+.terminal button{
+
+    width:100%;
+
+    height:60px;
+
+    border:none;
+
+    border-radius:14px;
+
+    cursor:pointer;
+
+    background:var(--primary);
+
+    color:#041015;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+    transition:var(--transition);
+
+}
+
+.terminal button:hover{
+
+    background:var(--primary-dark);
+
+    transform:translateY(-3px);
+
+}
+
+.terminal button:active{
+
+    transform:scale(.98);
+
+}
+
+/* ========================================= */
+
+.demo-note{
+
+    margin-top:18px;
+
+    text-align:center;
+
+    color:#9eabb7;
+
+    font-size:12px;
+
+}
+
+/* ========================================= */
+
+.order-card{
+
+    background:linear-gradient(145deg,#171717,#0b0b0b);
+
+    border-radius:var(--radius);
+
+    border:1px solid var(--border);
+
+    padding:30px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.order-card>p{
+
+    color:var(--primary);
+
+    font-size:13px;
+
+    font-weight:700;
+
+    letter-spacing:.2em;
+
+}
+
+/* ========================================= */
+
+.order-item{
+
+    display:flex;
+
+    gap:18px;
+
+    align-items:center;
+
+    padding:20px 0;
+
+    border-bottom:1px solid var(--border);
+
+}
+
+.order-item img{
+
+    width:95px;
+
+    height:95px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    flex-shrink:0;
+
+}
+
+.order-item div{
+
+    flex:1;
+
+}
+
+.order-item h3{
+
+    font-size:18px;
+
+    margin-bottom:8px;
+
+}
+
+.order-item p{
+
+    color:#aeb8c0;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+}
+
+.order-item strong{
+
+    color:var(--primary);
+
+    font-size:20px;
+
+}
+
+/* ========================================= */
+
+.order-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:30px;
+
+    padding-top:25px;
+
+    border-top:1px solid var(--border);
+
+    font-size:30px;
+
+    font-weight:bold;
+
+}
+
+.order-total strong{
+
+    color:var(--primary);
+
+}
+/* ===================================================
+   BANKSO - PAIEMENT.CSS
+   PARTIE 2
+=================================================== */
+
+/* =========================================
+   PAGE DE CONFIRMATION
+========================================= */
+
+.payment-success{
+
+    width:min(900px,95%);
+
+    margin:60px auto;
+
+    padding:55px;
+
+    text-align:center;
+
+    background:linear-gradient(145deg,#171717,#0b0b0b);
+
+    border:1px solid var(--border);
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    animation:fadeUp .7s ease;
+
+}
+
+.payment-success i{
+
+    font-size:85px;
+
+    color:var(--primary);
+
+    display:block;
+
+    margin-bottom:20px;
+
+}
+
+.payment-success h1,
+.payment-success h2{
+
+    font-family:Anton,sans-serif;
+
+    font-weight:400;
+
+    font-size:clamp(42px,6vw,72px);
+
+    margin-bottom:20px;
+
+    letter-spacing:.05em;
+
+}
+
+.payment-success p{
+
+    color:var(--text2);
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+/* ========================================= */
+
+.confirmation-list{
+
+    margin-top:45px;
+
+}
+
+.confirmation-item{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:18px;
+
+    margin-bottom:18px;
+
+    background:#101010;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    transition:.3s;
+
+}
+
+.confirmation-item:hover{
+
+    transform:translateY(-3px);
+
+    border-color:rgba(0,200,245,.4);
+
+}
+
+.confirmation-item img{
+
+    width:120px;
+
+    height:120px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    flex-shrink:0;
+
+}
+
+.confirmation-item div{
+
+    flex:1;
+
+}
+
+.confirmation-item h3{
+
+    font-size:22px;
+
+    margin-bottom:10px;
+
+}
+
+.confirmation-item p{
+
+    margin:6px 0;
+
+    color:#b9c2cb;
+
+}
+
+.confirmation-item strong{
+
+    color:var(--primary);
+
+    font-size:22px;
+
+}
+
+/* ========================================= */
+
+.confirmation-total{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-top:35px;
+
+    padding-top:25px;
+
+    border-top:1px solid var(--border);
+
+    font-size:30px;
+
+    font-weight:700;
+
+}
+
+.confirmation-total strong{
+
+    color:var(--primary);
+
+}
+
+/* ========================================= */
+
+.continue-btn{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:45px;
+
+    padding:18px 42px;
+
+    border-radius:999px;
+
+    background:var(--primary);
+
+    color:#051015;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+    transition:.3s;
+
+}
+
+.continue-btn:hover{
+
+    background:var(--primary-dark);
+
+    transform:translateY(-4px);
+
+    box-shadow:0 12px 35px rgba(0,200,245,.35);
+
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(35px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =========================================
+   TABLETTE
+========================================= */
+
+@media(max-width:992px){
+
+.payment-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.order-card{
+
+    order:-1;
+
+}
+
+.payment-page{
+
+    width:95%;
+
+}
+
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:768px){
+
+.payment-page{
+
+    width:calc(100% - 24px);
+
+    padding:40px 0 60px;
+
+}
+
+.payment-intro{
+
+    margin-bottom:35px;
+
+}
+
+.payment-intro h1{
+
+    font-size:48px;
+
+}
+
+.terminal{
+
+    padding:22px;
+
+}
+
+.order-card{
+
+    padding:22px;
+
+}
+
+.payment-row{
+
+    grid-template-columns:1fr;
+
+}
+
+.order-item{
+
+    gap:14px;
+
+}
+
+.order-item img{
+
+    width:75px;
+
+    height:75px;
+
+}
+
+.order-item h3{
+
+    font-size:16px;
+
+}
+
+.order-item p{
+
+    font-size:13px;
+
+}
+
+.order-total{
+
+    font-size:24px;
+
+}
+
+.payment-success{
+
+    padding:30px 22px;
+
+    margin:25px auto;
+
+}
+
+.payment-success i{
+
+    font-size:65px;
+
+}
+
+.payment-success h1,
+.payment-success h2{
+
+    font-size:42px;
+
+}
+
+.payment-success p{
+
+    font-size:15px;
+
+}
+
+.confirmation-item{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.confirmation-item img{
+
+    width:140px;
+
+    height:140px;
+
+}
+
+.confirmation-item div{
+
+    text-align:center;
+
+}
+
+.confirmation-total{
+
+    flex-direction:column;
+
+    gap:12px;
+
+    font-size:24px;
+
+}
+
+.continue-btn{
+
+    width:100%;
+
+}
+
+}
+
+/* =========================================
+   PETITS SMARTPHONES
+========================================= */
+
+@media(max-width:480px){
+
+.payment-intro h1{
+
+    font-size:38px;
+
+}
+
+.terminal h2{
+
+    font-size:28px;
+
+}
+
+.order-item{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.order-item div{
+
+    text-align:center;
+
+}
+
+.order-item strong{
+
+    display:block;
+
+    margin-top:10px;
+
+}
+
+.payment-success h1,
+.payment-success h2{
+
+    font-size:34px;
+
+}
+
+.payment-success{
+
+    padding:22px 18px;
+
+}
+
+.confirmation-item img{
+
+    width:120px;
+
+    height:120px;
+
+}
+
+}

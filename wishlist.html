@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Wishlist | BANKSO</title>
+
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/wishlist.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <script src="js/site.js" defer></script>
+    <script src="js/wishlist.js" defer></script>
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a class="logo" href="index.html">
+        <img src="images/logo.png" alt="BANKSO">
+    </a>
+
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu">
+        <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <nav>
+
+        <a href="index.html">HOME</a>
+        <a href="destinations.html">DESTINATIONS</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+
+    </nav>
+
+    <div class="header-icons">
+
+        <a href="wishlist.html" aria-label="Wishlist">
+
+            <i class="fa-regular fa-heart"></i>
+
+            <span class="wishlist-count">0</span>
+
+        </a>
+
+        <a href="panier.html" aria-label="Panier">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span class="cart-count">0</span>
+
+        </a>
+
+    </div>
+
+</header>
+
+<main class="wishlist">
+
+    <h1>MA WISHLIST</h1>
+
+    <p>
+
+        Retrouvez ici tous vos articles favoris.
+
+    </p>
+
+    <div id="wishlistContainer">
+
+        <!-- Produits générés automatiquement -->
+
+    </div>
+
+    <div id="empty">
+
+        <i class="fa-regular fa-heart"></i>
+
+        <h2>Votre wishlist est vide</h2>
+
+        <a href="destinations.html">
+
+            Découvrir la boutique
+
+        </a>
+
+    </div>
+
+</main>
+
+<footer>
+
+    <div class="wishlist-footer-inner">
+
+        <p>© 2026 BANKSO — Tous droits réservés.</p>
+
+    </div>
+
+</footer>
+<div id="toast" class="toast">
+
+    <i class="fa-solid fa-circle-check"></i>
+
+    <div>
+
+        <strong>Produit ajouté</strong>
+
+        <p>L'article a été ajouté à votre panier.</p>
+
+    </div>
+
+</div>
+</body>
+
+</html>

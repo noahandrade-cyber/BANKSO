@@ -1,0 +1,13 @@
+CREATE TABLE collections (
+
+id INT AUTO_INCREMENT PRIMARY KEY,
+
+name VARCHAR(100),
+
+country VARCHAR(100),
+
+description TEXT,
+
+banner VARCHAR(255)
+
+);

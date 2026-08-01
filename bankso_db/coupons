@@ -1,0 +1,11 @@
+CREATE TABLE coupons (
+
+id INT AUTO_INCREMENT PRIMARY KEY,
+
+code VARCHAR(50),
+
+discount INT,
+
+expiration DATE
+
+);

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mon Panier | BANKSO</title>
+
+    <link rel="stylesheet" href="css/panier.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+
+  <link rel="stylesheet" href="css/shared.css">
+  <script src="js/site.js" defer></script>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+
+  
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="BANKSO"></a>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+    <nav aria-label="Navigation principale">
+      <a href="index.html">HOME</a><a href="destinations.html">DESTINATIONS</a><a href="about.html">ABOUT</a><a href="contact.html">CONTACT</a>
+    </nav>
+    <div class="header-icons">
+      <a href="wishlist.html" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="wishlist-count">0</span></a>
+      <a href="panier.html" aria-label="Panier"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">0</span></a>
+    </div>
+  </header>
+
+<!-- ================= HERO ================= -->
+
+<section class="cart-hero">
+
+    <h1>MON PANIER</h1>
+
+    <p>
+
+        Vérifiez votre commande avant de passer au paiement.
+
+    </p>
+
+</section>
+
+<!-- ================= CONTENU ================= -->
+
+<main class="cart-wrapper">
+
+    <!-- PRODUITS -->
+
+    <section class="cart-left">
+
+        <div id="cart-items">
+
+            <!-- Généré automatiquement -->
+
+        </div>
+
+    </section>
+
+    <!-- RÉCAPITULATIF -->
+
+    <aside class="cart-right">
+
+        <div class="summary">
+
+            <h2>RÉCAPITULATIF</h2>
+
+            <div class="summary-line">
+
+                <span>Sous-total</span>
+
+                <span id="subtotal">0.00 €</span>
+
+            </div>
+
+            <div class="summary-line">
+
+                <span>Livraison</span>
+
+                <span id="shipping">Gratuite</span>
+
+            </div>
+
+            <div class="summary-line">
+
+                <span>TVA</span>
+
+                <span>Incluse</span>
+
+            </div>
+
+            <div class="summary-total">
+
+                <span>Total</span>
+
+                <span id="total">0.00 €</span>
+
+            </div>
+
+        </div>
+
+        <button id="checkoutButton" class="checkout-button" type="button">
+
+            <i class="fa-solid fa-lock"></i>
+
+            PASSER AU PAIEMENT
+
+        </button>
+        <button id="clearCartButton" class="clear-cart-button" type="button">
+
+    <i class="fa-solid fa-trash"></i>
+
+    VIDER LE PANIER
+
+</button>
+
+    </aside>
+
+</main>
+
+<!-- ================= PANIER VIDE ================= -->
+
+<section id="empty-cart" class="empty-cart">
+
+    <i class="fa-solid fa-bag-shopping"></i>
+
+    <h2>Votre panier est vide</h2>
+
+    <p>
+
+        Découvrez notre collection et trouvez votre prochaine pièce.
+
+    </p>
+
+    <a href="destinations.html">
+
+        Continuer mes achats
+
+    </a>
+
+</section>
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+
+        © 2026 BANKSO
+
+    </p>
+
+</footer>
+
+<script src="js/panier.js"></script>
+
+</body>
+
+</html>

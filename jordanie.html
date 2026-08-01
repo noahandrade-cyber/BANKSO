@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="T-shirt Jordanie BANKSO, coupe oversize premium.">
+  <title>BANKSO | T-shirt Jordanie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="css/shared.css">
+  <link rel="stylesheet" href="css/produit.css">
+  <script src="js/site.js" defer></script>
+  <script src="js/produit.js" defer></script>
+</head>
+<body data-name="T-shirt Jordanie" data-price="24.99" data-image="images/back-jordan.jpg" data-product-url="jordanie.html">
+
+  <header class="site-header">
+    <a class="logo" href="index.html"><img src="images/logo.png" alt="BANKSO"></a>
+    <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+    <nav aria-label="Navigation principale">
+      <a href="index.html">HOME</a><a href="destinations.html">DESTINATIONS</a><a href="about.html">ABOUT</a><a href="contact.html">CONTACT</a>
+    </nav>
+    <div class="header-icons">
+      <a href="wishlist.html" aria-label="Wishlist"><i class="fa-regular fa-heart"></i><span class="wishlist-count">0</span></a>
+      <a href="panier.html" aria-label="Panier"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">0</span></a>
+    </div>
+  </header>
+  <main>
+    <section class="product" aria-label="T-shirt Jordanie">
+      <div class="gallery">
+        <div class="main-image"><img id="mainImage" src="images/back-jordan.jpg" alt="T-shirt Jordanie, vue dos"></div>
+        <div class="thumbnail-row">
+          <button class="thumb active" type="button" data-image="images/back-jordan.jpg" aria-label="Vue dos"><img src="images/back-jordan.jpg" alt="Vue dos"></button>
+          <button class="thumb" type="button" data-image="images/front-bks.jpg" aria-label="Vue face"><img src="images/front-bks.jpg" alt="Vue face"></button>
+        </div>
+      </div>
+      <div class="product-info">
+        <span class="country">JORDANIE</span>
+        <h1>T-shirt Jordanie</h1>
+        <p class="price">24,99 €</p>
+        <p class="shipping">Livraison incluse dans le prix</p>
+        <p class="description">Inspiré de la culture de Jordanie, ce t-shirt oversize premium associe confort, qualité et style streetwear.</p>
+        <div class="sizes"><div class="size-heading"><h2>Taille</h2><button class="size-guide" type="button">Guide des tailles</button></div><div class="buttons" role="group" aria-label="Choisir une taille"><button type="button">S</button><button class="active" type="button">M</button><button type="button">L</button><button type="button">XL</button></div></div>
+        <button id="addToCart" class="primary-button" type="button">Ajouter au panier</button>
+        <button class="wishlist" type="button"><i class="fa-regular fa-heart"></i> Ajouter à la wishlist</button>
+        <div class="accordion">
+          <details><summary>Composition & entretien</summary><p>100 % coton premium 320 GSM. Lavage à 30 °C, à l'envers. Ne pas utiliser de sèche-linge.</p></details>
+          <details><summary>Guide des tailles</summary><p>S : 165–170 cm · M : 170–178 cm · L : 178–185 cm · XL : 185–195 cm. Coupe oversize.</p></details>
+          <details><summary>Livraison & retours</summary><p>Préparation sous 24 à 48 h, livraison suivie et retours possibles sous 14 jours après réception.</p></details>
+        </div>
+      </div>
+    </section>
+    <section class="recommended"><p>VOUS AIMEREZ AUSSI</p><h2>RECOMMANDÉS</h2><div class="recommended-grid">
+    <a href="albanie.html" class="product-card"><img src="images/back-albania.jpg" alt="T-shirt Albanie"><span>ALBANIE</span><h3>T-shirt Albanie</h3><strong>24,99 €</strong><small>Livraison incluse</small></a>
+    <a href="algerie.html" class="product-card"><img src="images/back-algeria-zellige.jpg" alt="T-shirt Algérie"><span>ALGÉRIE</span><h3>T-shirt Algérie</h3><strong>24,99 €</strong><small>Livraison incluse</small></a>
+    <a href="italie.html" class="product-card"><img src="images/back-italy.jpg" alt="T-shirt Italie"><span>ITALIE</span><h3>T-shirt Italie</h3><strong>24,99 €</strong><small>Livraison incluse</small></a>
+    <a href="japon.html" class="product-card"><img src="images/back-japan.jpg" alt="T-shirt Japon"><span>JAPON</span><h3>T-shirt Japon</h3><strong>24,99 €</strong><small>Livraison incluse</small></a></div></section>
+  </main>
+  <footer>© 2026 Bankso</footer>
+    <!-- ========================= -->
+<!-- Overlay -->
+<!-- ========================= -->
+
+<div id="cartOverlay" class="cart-overlay"></div>
+
+<!-- ========================= -->
+<!-- Drawer Panier -->
+<!-- ========================= -->
+
+<aside id="cartDrawer" class="cart-drawer">
+
+    <div class="drawer-header">
+        <h2>Mon Panier</h2>
+
+        <button id="closeDrawer">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+    </div>
+
+    <div class="drawer-success">
+        <i class="fa-solid fa-circle-check"></i>
+        Produit ajouté au panier
+    </div>
+
+    <div id="drawerItems" class="drawer-items">
+
+        <!-- Les produits seront ajoutés ici automatiquement -->
+
+    </div>
+
+    <div class="drawer-footer">
+
+        <div class="drawer-total">
+
+            <span>Sous-total</span>
+
+            <strong id="drawerTotal">0 €</strong>
+
+        </div>
+
+        <button class="drawer-btn checkout-btn">
+            <a href="paiement.html">Commander</a>
+        </button>
+
+        <button class="drawer-btn cart-btn">
+            <a href="panier.html">Voir mon panier</a>
+        </button>
+
+        <button class="continue-shopping" id="continueShopping">
+            Continuer mes achats
+        </button>
+
+    </div>
+
+</aside>
+</body>
+</html>

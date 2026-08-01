@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Paiement sécurisé | BANKSO</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/paiement.css">
+
+</head>
+
+<body>
+
+<header class="site-header">
+
+    <a href="index.html" class="logo">
+
+        <img src="images/logo.png" alt="BANKSO">
+
+    </a>
+
+    <nav>
+
+        <a href="index.html">HOME</a>
+        <a href="destinations.html">DESTINATIONS</a>
+        <a href="about.html">ABOUT</a>
+        <a href="contact.html">CONTACT</a>
+
+    </nav>
+
+    <div class="header-icons">
+
+        <a href="wishlist.html">
+
+            <i class="fa-regular fa-heart"></i>
+
+            <span class="wishlist-count">0</span>
+
+        </a>
+
+        <a href="panier.html">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <span class="cart-count">0</span>
+
+        </a>
+
+    </div>
+
+</header>
+
+<main class="payment-page">
+
+    <section class="payment-intro">
+
+        <p>
+
+            <i class="fa-solid fa-lock"></i>
+
+            Paiement 100% sécurisé
+
+        </p>
+
+        <h1>
+
+            FINALISER
+
+            <span>MA COMMANDE</span>
+
+        </h1>
+
+        <a href="panier.html">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Retour au panier
+
+        </a>
+
+    </section>
+
+    <section class="payment-grid">
+
+        <form id="payment-form" class="terminal">
+
+            <div class="terminal-head">
+
+                <span>
+
+                    <i class="fa-solid fa-credit-card"></i>
+
+                    TERMINAL BANKSO
+
+                </span>
+
+                <i class="fa-solid fa-wifi"></i>
+
+            </div>
+
+            <h2>
+
+                Paiement sécurisé Stripe
+
+            </h2>
+
+            <p>
+
+                Vous allez être redirigé vers Stripe afin
+                de finaliser votre paiement en toute sécurité.
+
+            </p>
+
+            <p class="payment-note">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Vos données bancaires ne transitent jamais
+                par BANKSO.
+
+            </p>
+
+            <button type="submit">
+
+                <i class="fa-solid fa-lock"></i>
+
+                CONTINUER VERS LE PAIEMENT
+
+                <span id="payment-total">
+
+                    0,00 €
+
+                </span>
+
+            </button>
+
+        </form>
+
+        <aside class="order-card">
+
+            <p>
+
+                VOTRE COMMANDE
+
+            </p>
+
+            <div id="order-items">
+
+            </div>
+
+            <div class="order-total">
+
+                <span>
+
+                    Total
+
+                </span>
+
+                <strong id="order-total">
+
+                    0,00 €
+
+                </strong>
+
+            </div>
+
+        </aside>
+
+    </section>
+
+</main>
+
+<script src="js/site.js"></script>
+
+<script src="js/paiement.js"></script>
+
+</body>
+
+</html>
