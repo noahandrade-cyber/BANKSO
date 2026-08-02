@@ -11,25 +11,20 @@ const app = express();
 
 const PORT = process.env.PORT || 4242;
 
-// =====================================
-// STRIPE
-// =====================================
-
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 // =====================================
 // BASE URL
 // =====================================
 
-const baseUrl = () => {
+function baseUrl() {
 
-    return process.env.BASE_URL ||
-        `http://localhost:${PORT}`;
+    return process.env.BASE_URL || `http://localhost:${PORT}`;
 
-};
+}
 
 // =====================================
-// SQLITE
+// DOSSIER DATABASE
 // =====================================
 
 const databaseFolder = path.join(__dirname, "database");
@@ -39,6 +34,10 @@ if (!fs.existsSync(databaseFolder)) {
     fs.mkdirSync(databaseFolder);
 
 }
+
+// =====================================
+// SQLITE
+// =====================================
 
 const db = new Database(
 
@@ -60,13 +59,23 @@ db.exec(schema);
 // MIDDLEWARE
 // =====================================
 
+app.use(express.static(__dirname));
+
 app.use(express.json());
 
-app.use(express.static(__dirname));
-app.get("/", (req, res) => {
-    res.sendFile(path.join(root, "index.html"));
-});
+// =====================================
+// PAGE D'ACCUEIL
+// =====================================
 
+app.get("/", (req, res) => {
+
+    res.sendFile(
+
+        path.join(__dirname, "index.html")
+
+    );
+
+});
 // =====================================
 // NODEMAILER
 // =====================================
@@ -74,6 +83,7 @@ app.get("/", (req, res) => {
 const emailReady = Boolean(
 
     process.env.SMTP_HOST &&
+    process.env.SMTP_PORT &&
     process.env.SMTP_USER &&
     process.env.SMTP_PASS &&
     process.env.CONTACT_EMAIL
@@ -102,13 +112,13 @@ if (emailReady) {
 
     });
 
-    mailer.verify((error) => {
+    mailer.verify(error => {
 
         if (error) {
 
-            console.log("❌ SMTP");
+            console.error("❌ SMTP");
 
-            console.log(error);
+            console.error(error);
 
         }
 
@@ -123,7 +133,7 @@ if (emailReady) {
 }
 
 // =====================================
-// FONCTIONS
+// FONCTIONS UTILITAIRES
 // =====================================
 
 function clean(value, max = 200) {
@@ -135,25 +145,38 @@ function clean(value, max = 200) {
         .slice(0, max);
 
 }
+
+function validEmail(email) {
+
+    return /^\S+@\S+\.\S+$/.test(email);
+
+}
+
 // =====================================
 // WAITLIST
 // =====================================
 
 app.post("/api/waitlist", (req, res) => {
 
-    const email = clean(req.body.email, 254).toLowerCase();
-
-    if (!/^\S+@\S+\.\S+$/.test(email)) {
-
-        return res.status(400).json({
-
-            error: "Adresse e-mail invalide."
-
-        });
-
-    }
-
     try {
+
+        const email = clean(
+
+            req.body.email,
+
+            254
+
+        ).toLowerCase();
+
+        if (!validEmail(email)) {
+
+            return res.status(400).json({
+
+                error: "Adresse e-mail invalide."
+
+            });
+
+        }
 
         db.prepare(
 
@@ -163,7 +186,7 @@ app.post("/api/waitlist", (req, res) => {
 
         console.log("✅ Waitlist :", email);
 
-        return res.json({
+        res.json({
 
             ok: true,
 
@@ -177,67 +200,78 @@ app.post("/api/waitlist", (req, res) => {
 
         console.error(error);
 
-        return res.status(500).json({
+        res.status(500).json({
 
-            error: "Impossible d'enregistrer cette adresse."
+            error:
+
+            "Impossible d'enregistrer cette adresse."
 
         });
 
     }
 
 });
-
 // =====================================
 // CONTACT
 // =====================================
 
 app.post("/api/contact", async (req, res) => {
 
-    const name = clean(req.body.name);
-
-    const email = clean(req.body.email, 254).toLowerCase();
-
-    const subject = clean(req.body.subject);
-
-    const message = clean(req.body.message, 5000);
-
-    if (
-
-        !name ||
-
-        !subject ||
-
-        !message ||
-
-        !/^\S+@\S+\.\S+$/.test(email)
-
-    ) {
-
-        return res.status(400).json({
-
-            error: "Veuillez compléter tous les champs."
-
-        });
-
-    }
-
     try {
 
-        db.prepare(
+        const name = clean(req.body.name);
 
-            `
+        const email = clean(
 
-            INSERT INTO contact_messages
+            req.body.email,
 
-            (name,email,subject,message)
+            254
 
-            VALUES
+        ).toLowerCase();
 
-            (?,?,?,?)
+        const subject = clean(req.body.subject);
 
-            `
+        const message = clean(
 
-        ).run(
+            req.body.message,
+
+            5000
+
+        );
+
+        if (
+
+            !name ||
+
+            !subject ||
+
+            !message ||
+
+            !validEmail(email)
+
+        ) {
+
+            return res.status(400).json({
+
+                error: "Veuillez compléter tous les champs."
+
+            });
+
+        }
+
+        db.prepare(`
+INSERT INTO contact_messages
+(
+    name,
+    email,
+    subject,
+    message
+)
+VALUES
+(
+    ?,?,?,?
+)
+`).run(
 
             name,
 
@@ -253,29 +287,22 @@ app.post("/api/contact", async (req, res) => {
 
             await mailer.sendMail({
 
-                from:
+                from: `BANKSO <${process.env.SMTP_USER}>`,
 
-                    `BANKSO <${process.env.SMTP_USER}>`,
-
-                to:
-
-                    process.env.CONTACT_EMAIL,
+                to: process.env.CONTACT_EMAIL,
 
                 replyTo: email,
 
-                subject:
-
-                    `[BANKSO] ${subject}`,
+                subject: `[BANKSO] ${subject}`,
 
                 text:
-
 `Nom : ${name}
 
 Email : ${email}
 
 Sujet : ${subject}
 
------------------------------------
+----------------------------------
 
 ${message}`
 
@@ -283,11 +310,13 @@ ${message}`
 
         }
 
-        console.log("📧 Contact reçu :", email);
+        console.log("📩 Nouveau message :", email);
 
         res.json({
 
-            ok: true
+            ok: true,
+
+            message: "Message envoyé."
 
         });
 
@@ -299,9 +328,7 @@ ${message}`
 
         res.status(500).json({
 
-            error:
-
-            "Impossible d'envoyer votre message."
+            error: "Impossible d'envoyer le message."
 
         });
 
@@ -309,69 +336,18 @@ ${message}`
 
 });
 // =====================================
-// WEBHOOK STRIPE
-// =====================================
-
-app.post(
-    "/webhook",
-    express.raw({ type: "application/json" }),
-    (req, res) => {
-
-        try {
-
-            const event = stripe.webhooks.constructEvent(
-
-                req.body,
-
-                req.headers["stripe-signature"],
-
-                process.env.STRIPE_WEBHOOK_SECRET
-
-            );
-
-            if (event.type === "checkout.session.completed") {
-
-                const session = event.data.object;
-
-                db.prepare(`
-UPDATE orders
-SET
-status='paid',
-paid_at=CURRENT_TIMESTAMP
-WHERE stripe_session_id=?
-`).run(session.id);
-
-                console.log("✅ Paiement confirmé :", session.id);
-
-            }
-
-            res.sendStatus(200);
-
-        }
-
-        catch (error) {
-
-            console.error(error);
-
-            res.status(400).send(error.message);
-
-        }
-
-    }
-
-);
-
-// =====================================
-// CREATION SESSION STRIPE
+// STRIPE CHECKOUT
 // =====================================
 
 app.post("/api/create-checkout-session", async (req, res) => {
 
     try {
 
-        const products = req.body.products;
+        const products = Array.isArray(req.body.products)
+            ? req.body.products
+            : [];
 
-        if (!Array.isArray(products) || products.length === 0) {
+        if (products.length === 0) {
 
             return res.status(400).json({
 
@@ -383,30 +359,26 @@ app.post("/api/create-checkout-session", async (req, res) => {
 
         const line_items = products.map(product => ({
 
-            quantity: product.quantity,
+            quantity: Number(product.quantity),
 
             price_data: {
 
                 currency: "eur",
 
-                unit_amount: Math.round(product.price * 100),
+                unit_amount: Math.round(Number(product.price) * 100),
 
                 product_data: {
 
-                    name: product.name,
+                    name: clean(product.name, 120),
 
                     description:
 
-                        `Taille : ${product.size}`,
+                        `Taille : ${product.size || "-"}`,
 
-                    images: product.image
+                    images:
 
-                        ? [
-
-                            `${baseUrl()}/${product.image}`
-
-                        ]
-
+                        product.image
+                        ? [`${baseUrl()}/${product.image}`]
                         : []
 
                 }
@@ -415,11 +387,15 @@ app.post("/api/create-checkout-session", async (req, res) => {
 
         }));
 
-        const total = products.reduce(
+        const totalCents = products.reduce(
 
-            (sum, product) =>
+            (total, product) =>
 
-                sum + product.price * product.quantity,
+                total +
+
+                Math.round(Number(product.price) * 100) *
+
+                Number(product.quantity),
 
             0
 
@@ -435,61 +411,47 @@ app.post("/api/create-checkout-session", async (req, res) => {
 
             ],
 
+            customer_creation: "always",
+
+            billing_address_collection: "required",
+
+            phone_number_collection: {
+
+                enabled: true
+
+            },
+
+            shipping_address_collection: {
+
+                allowed_countries: [
+
+                    "BE",
+
+                    "FR",
+
+                    "LU",
+
+                    "NL",
+
+                    "DE"
+
+                ]
+
+            },
+
             line_items,
 
             success_url:
 
-                `${baseUrl()}/paiement-valide.html?session_id={CHECKOUT_SESSION_ID}`,
+`${baseUrl()}/paiement-valide.html?session_id={CHECKOUT_SESSION_ID}`,
 
             cancel_url:
 
-                `${baseUrl()}/paiement.html`
+`${baseUrl()}/paiement.html`
 
         });
 
-        db.prepare(`
-
-INSERT INTO orders
-
-(
-
-    stripe_session_id,
-
-    total_cents,
-
-    status
-
-)
-
-VALUES
-
-(
-
-    ?,
-
-    ?,
-
-    ?
-
-)
-`
-
-        `).run(
-
-            session.id,
-
-            total,
-
-            "pending"
-
-        );
-        const totalCents = products.reduce((total, product) => {
-
-    return total + Math.round(product.price * 100) * product.quantity;
-
-}, 0);
-
-const order = db.prepare(`
+        const order = db.prepare(`
 INSERT INTO orders
 (
     stripe_session_id,
@@ -500,26 +462,23 @@ INSERT INTO orders
 )
 VALUES
 (
-    ?,
-    ?,
-    ?,
-    ?,
-    ?
+    ?, ?, ?, ?, ?
 )
 `).run(
 
-    session.id,
+            session.id,
 
-    "",
+            "",
 
-    "pending",
+            "pending",
 
-    totalCents,
+            totalCents,
 
-    "eur"
+            "eur"
 
-);
-const insertItem = db.prepare(`
+        );
+
+        const insertItem = db.prepare(`
 INSERT INTO order_items
 (
     order_id,
@@ -534,23 +493,23 @@ VALUES
 )
 `);
 
-for (const product of products) {
+        for (const product of products) {
 
-    insertItem.run(
+            insertItem.run(
 
-        order.lastInsertRowid,
+                order.lastInsertRowid,
 
-        product.name,
+                product.name,
 
-        product.size || "",
+                product.size || "",
 
-        product.quantity,
+                Number(product.quantity),
 
-        Math.round(product.price * 100)
+                Math.round(Number(product.price) * 100)
 
-    );
+            );
 
-}
+        }
 
         res.json({
 
@@ -573,30 +532,225 @@ for (const product of products) {
     }
 
 });
-
 // =====================================
-// VERIFICATION SESSION
+// WEBHOOK STRIPE
+// =====================================
+
+app.post(
+    "/webhook",
+    express.raw({
+        type: "application/json"
+    }),
+    async (req, res) => {
+
+        let event;
+
+        try {
+
+            event = stripe.webhooks.constructEvent(
+
+                req.body,
+
+                req.headers["stripe-signature"],
+
+                process.env.STRIPE_WEBHOOK_SECRET
+
+            );
+
+        }
+
+        catch (error) {
+
+            console.error("Webhook invalide");
+
+            console.error(error.message);
+
+            return res.status(400).send(error.message);
+
+        }
+
+        try {
+
+            if (event.type === "checkout.session.completed") {
+
+                const session = event.data.object;
+
+                db.prepare(`
+UPDATE orders
+SET
+    status=?,
+    customer_email=?,
+    paid_at=CURRENT_TIMESTAMP
+WHERE
+    stripe_session_id=?
+`).run(
+
+                    "paid",
+
+                    session.customer_details?.email || "",
+
+                    session.id
+
+                );
+
+                console.log("");
+
+                console.log("================================");
+
+                console.log("✅ Paiement confirmé");
+
+                console.log(session.id);
+
+                console.log("================================");
+
+                const order = db.prepare(`
+SELECT *
+FROM orders
+WHERE stripe_session_id=?
+`).get(session.id);
+
+                if (
+
+                    order &&
+
+                    mailer &&
+
+                    order.customer_email
+
+                ) {
+
+                    await mailer.sendMail({
+
+                        from:
+
+`BANKSO <${process.env.SMTP_USER}>`,
+
+                        to:
+
+order.customer_email,
+
+                        subject:
+
+"Confirmation de votre commande BANKSO",
+
+                        text:
+
+`Bonjour,
+
+Merci pour votre commande.
+
+Numéro de commande :
+
+#${order.id}
+
+Montant :
+
+${(order.total_cents / 100).toFixed(2)} €
+
+Nous préparons actuellement votre colis.
+
+BANKSO`
+
+                    });
+
+                }
+
+            }
+
+            res.sendStatus(200);
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            res.sendStatus(500);
+
+        }
+
+    }
+
+);
+// =====================================
+// VERIFICATION SESSION STRIPE
 // =====================================
 
 app.get("/api/checkout-session", async (req, res) => {
 
     try {
 
+        const sessionId = req.query.session_id;
+
+        if (!sessionId) {
+
+            return res.status(400).json({
+
+                error: "Session Stripe manquante."
+
+            });
+
+        }
+
         const session = await stripe.checkout.sessions.retrieve(
 
-            req.query.session_id
+            sessionId
+
+        );
+
+        const order = db.prepare(`
+SELECT *
+FROM orders
+WHERE stripe_session_id=?
+`).get(
+
+            sessionId
+
+        );
+
+        const items = db.prepare(`
+SELECT *
+FROM order_items
+WHERE order_id=?
+`).all(
+
+            order ? order.id : -1
 
         );
 
         res.json({
 
-            paid: session.payment_status === "paid",
+            paid:
 
-            email: session.customer_details?.email || "",
+                session.payment_status === "paid",
 
-            amount: session.amount_total,
+            sessionId:
 
-            currency: session.currency
+                session.id,
+
+            customer:
+
+                session.customer_details || null,
+
+            order:
+
+                order || null,
+
+            items:
+
+                items,
+
+            total:
+
+                order
+                    ? order.total_cents
+                    : session.amount_total,
+
+            currency:
+
+                order
+                    ? order.currency
+                    : session.currency
 
         });
 
@@ -608,141 +762,12 @@ app.get("/api/checkout-session", async (req, res) => {
 
         res.status(500).json({
 
-            error: error.message
+            error:
+
+                "Impossible de récupérer la commande."
 
         });
 
     }
-
-});
-// =====================================
-// PAGE D'ACCUEIL
-// =====================================
-
-app.get("/", (req, res) => {
-
-    res.sendFile(
-
-        path.join(__dirname, "index.html")
-
-    );
-
-});
-
-// =====================================
-// PAGE 404
-// =====================================
-
-app.use((req, res) => {
-
-    res.status(404).json({
-
-        error: "Page introuvable."
-
-    });
-
-});
-
-// =====================================
-// GESTION DES ERREURS EXPRESS
-// =====================================
-
-app.use((error, req, res, next) => {
-
-    console.error("========================");
-    console.error("ERREUR SERVEUR");
-    console.error("========================");
-
-    console.error(error);
-
-    res.status(500).json({
-
-        error: "Erreur interne du serveur."
-
-    });
-
-});
-
-// =====================================
-// DEMARRAGE DU SERVEUR
-// =====================================
-
-const server = app.listen(PORT, () => {
-
-    console.log("");
-
-    console.log("========================================");
-
-    console.log("🚀 BANKSO est lancé");
-
-    console.log("");
-
-    console.log("Adresse :");
-
-    console.log(baseUrl());
-
-    console.log("");
-
-    console.log("========================================");
-
-});
-
-// =====================================
-// FERMETURE PROPRE
-// =====================================
-
-function shutdown() {
-
-    console.log("");
-
-    console.log("Arrêt du serveur...");
-
-    server.close(() => {
-
-        try {
-
-            db.close();
-
-            console.log("Base SQLite fermée.");
-
-        }
-
-        catch (e) {
-
-            console.log(e);
-
-        }
-
-        process.exit(0);
-
-    });
-
-}
-
-process.on("SIGINT", shutdown);
-
-process.on("SIGTERM", shutdown);
-
-// =====================================
-// ERREURS NODE
-// =====================================
-
-process.on("uncaughtException", error => {
-
-    console.error("");
-
-    console.error("ERREUR NON INTERCEPTEE");
-
-    console.error(error);
-
-});
-
-process.on("unhandledRejection", error => {
-
-    console.error("");
-
-    console.error("PROMESSE REJETEE");
-
-    console.error(error);
 
 });
