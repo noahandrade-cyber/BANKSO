@@ -112,23 +112,7 @@ if (emailReady) {
 
     });
 
-    mailer.verify(error => {
-
-        if (error) {
-
-            console.error("❌ SMTP");
-
-            console.error(error);
-
-        }
-
-        else {
-
-            console.log("✅ SMTP connecté");
-
-        }
-
-    });
+    
 
 }
 
@@ -769,5 +753,75 @@ WHERE order_id=?
         });
 
     }
+
+
+});
+// =====================================
+// PAGE 404
+// =====================================
+
+app.use((req, res) => {
+
+    res.status(404).json({
+
+        error: "Route introuvable."
+
+    });
+
+});
+
+// =====================================
+// GESTION DES ERREURS
+// =====================================
+
+app.use((error, req, res, next) => {
+
+    console.error(error);
+
+    res.status(500).json({
+
+        error: "Erreur interne du serveur."
+
+    });
+
+});
+
+// =====================================
+// DEMARRAGE DU SERVEUR
+// =====================================
+
+app.listen(PORT, "0.0.0.0", () => {
+
+    console.log("");
+
+    console.log("====================================");
+
+    console.log("🚀 BANKSO SERVER");
+
+    console.log(`Port : ${PORT}`);
+
+    console.log(`URL  : ${baseUrl()}`);
+
+    console.log("====================================");
+
+});
+
+// =====================================
+// ERREURS NODE
+// =====================================
+
+process.on("uncaughtException", error => {
+
+    console.error("UNCAUGHT EXCEPTION");
+
+    console.error(error);
+
+});
+
+process.on("unhandledRejection", error => {
+
+    console.error("UNHANDLED REJECTION");
+
+    console.error(error);
 
 });
