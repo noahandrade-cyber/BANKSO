@@ -67,13 +67,28 @@ nav a:hover{
 
 .contact{
 
-    max-width:1250px;
+    width:min(1400px, 100%);
+
     margin:90px auto;
 
+    padding:0 70px;
+
     display:grid;
+
     grid-template-columns:1fr 1fr;
 
-    gap:120px;
+    gap:100px;
+
+}
+.left{
+
+    padding-left:35px;
+
+}
+
+.right{
+
+    width:100%;
 
 }
 
@@ -325,59 +340,90 @@ footer{
 
 header{
 
-padding:0 30px;
+    padding:0 30px;
 
 }
 
 nav{
 
-display:none;
+    display:none;
 
 }
 
 .contact{
 
-grid-template-columns:1fr;
+    grid-template-columns:1fr;
 
-gap:80px;
+    gap:70px;
 
-padding:0 30px;
+    padding:0 40px;
+
+}
+
+.left{
+
+    padding-left:0;
 
 }
 
 .left h1{
 
-font-size:60px;
-line-height:60px;
+    font-size:60px;
+
+    line-height:60px;
 
 }
 
 }
-
 @media(max-width:600px){
 
+.contact{
+
+    margin:50px auto;
+
+    padding:0 22px;
+
+    gap:55px;
+
+}
+
+.left{
+
+    padding-left:0;
+
+}
+
 .left h1{
 
-font-size:48px;
-line-height:48px;
+    font-size:48px;
+
+    line-height:48px;
+
+}
+
+.left>p{
+
+    font-size:17px;
+
+    line-height:32px;
 
 }
 
 .logo img{
 
-width:90px;
+    width:90px;
 
 }
 
 .icons{
 
-gap:18px;
+    gap:18px;
 
 }
 
 button{
 
-font-size:12px;
+    font-size:12px;
 
 }
 
