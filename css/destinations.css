@@ -123,7 +123,6 @@ a{
     color:white;
 
 }
-
 /*==================================================
 HEADER
 ==================================================*/
@@ -135,13 +134,12 @@ HEADER
     left:0;
 
     width:100%;
-    height:82px;
 
     display:flex;
     justify-content:space-between;
     align-items:center;
 
-    padding:0 5%;
+    padding:18px 5%;
 
     background:rgba(5,5,5,.92);
     backdrop-filter:blur(18px);
@@ -150,25 +148,11 @@ HEADER
 
     z-index:1000;
 
-    transition:.35s;
-
-}
-
-/*==========================
-LOGO
-==========================*/
-
-.logo{
-
-    display:flex;
-    align-items:center;
-
 }
 
 .logo img{
 
-    width:145px;
-
+    width:150px;
     transition:.35s;
 
 }
@@ -187,7 +171,7 @@ NAVIGATION
 
     display:flex;
     align-items:center;
-    gap:40px;
+    gap:38px;
 
 }
 
@@ -195,10 +179,9 @@ NAVIGATION
 
     position:relative;
 
-    color:#fff;
+    color:#ffffff;
 
     font-size:14px;
-
     font-weight:600;
 
     letter-spacing:2px;
@@ -223,6 +206,7 @@ NAVIGATION
     bottom:-8px;
 
     width:0;
+
     height:2px;
 
     background:var(--blue);
@@ -253,16 +237,9 @@ ICÔNES
 
     position:relative;
 
-    width:42px;
-    height:42px;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
     color:#fff;
 
-    border-radius:50%;
+    font-size:20px;
 
     transition:.35s;
 
@@ -272,32 +249,18 @@ ICÔNES
 
     color:var(--blue);
 
-    background:rgba(255,255,255,.05);
-
 }
-
-.header-icons i{
-
-    font-size:20px;
-
-}
-
-/*==========================
-COMPTEURS
-==========================*/
 
 .cart-count,
 .wishlist-count{
 
     position:absolute;
 
-    top:-5px;
-    right:-5px;
+    top:-10px;
+    right:-10px;
 
-    min-width:19px;
-    height:19px;
-
-    padding:0 4px;
+    width:18px;
+    height:18px;
 
     border-radius:50%;
 
@@ -322,20 +285,14 @@ MENU MOBILE
 
     display:none;
 
-    width:42px;
-    height:42px;
-
-    border:none;
-
     background:none;
 
     color:#fff;
 
-    font-size:22px;
-
-    cursor:pointer;
+    font-size:24px;
 
 }
+
 
 /*==================================================
                 HERO
