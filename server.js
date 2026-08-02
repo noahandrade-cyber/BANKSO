@@ -267,42 +267,21 @@ VALUES
 
         );
 
-        if (mailer) {
+        console.log("📧 E-mail non envoyé (test)");
 
-            await mailer.sendMail({
+res.json({
 
-                from: `BANKSO <${process.env.SMTP_USER}>`,
+    ok: true,
 
-                to: process.env.CONTACT_EMAIL,
+    message: "Message envoyé."
 
-                replyTo: email,
+});
 
-                subject: `[BANKSO] ${subject}`,
-
-                text:
-`Nom : ${name}
-
-Email : ${email}
-
-Sujet : ${subject}
-
-----------------------------------
-
-${message}`
-
-            });
-
-        }
+return;
 
         console.log("📩 Nouveau message :", email);
 
-        res.json({
-
-            ok: true,
-
-            message: "Message envoyé."
-
-        });
+    
 
     }
 
